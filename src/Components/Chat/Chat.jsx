@@ -5,7 +5,7 @@ import InfoBar from '../InfoBar/InfoBar'
 import InputBar from '../InputBar/InputBar'
 import MessagesBox from '../MessagesBox/MessagesBox'
 import './Chat.css'
-const ENDPOINT = 'https://chatbot-server-socketio.herokuapp.com/'
+const ENDPOINT = process.env.ENDPOINT ||'http://localhost:3001'
 
 let socket;
 const Chat = ({ location }) => {
