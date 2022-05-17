@@ -5,7 +5,7 @@ import InfoBar from '../InfoBar/InfoBar'
 import InputBar from '../InputBar/InputBar'
 import MessagesBox from '../MessagesBox/MessagesBox'
 import './Chat.css'
-const ENDPOINT = "https://chatbot-server-socketio.herokuapp.com/";
+const ENDPOINT = 'https://chatbot-server-socketio.herokuapp.com/'
 
 let socket;
 const Chat = ({ location }) => {
@@ -20,29 +20,29 @@ const Chat = ({ location }) => {
         socket = io(ENDPOINT);
         setName(name)
         setRoom(room)
-        socket.emit('join', { name, room },(error) => {
-            if(error) {
-              alert(error);
+        socket.emit('join', { name, room }, (error) => {
+            if (error) {
+                alert(error);
             }
-          });
+        });
     }, [ENDPOINT, location.search])
     useEffect(() => {
         socket.on('message', (message) => {
-            setMessages((messages => [ ...messages, message ]))
+            setMessages((messages => [...messages, message]))
         })
     }, [])
     const sendMessage = (event) => {
         event.preventDefault()
-        if(message){
-            socket.emit('sendMessage',message,()=>setMessage(''))
+        if (message) {
+            socket.emit('sendMessage', message, () => setMessage(''))
         }
     }
     return (
         <div className="chatOuterContainer">
             <div className="chatInnerContainer">
-                    <InfoBar room={Room}/>
-                    <MessagesBox messages={messages} name={Name}/>
-                    <InputBar message={message} setMessage={setMessage} sendMessage={sendMessage}/>
+                <InfoBar room={Room} />
+                <MessagesBox messages={messages} name={Name} />
+                <InputBar message={message} setMessage={setMessage} sendMessage={sendMessage} />
             </div>
         </div>
     )
